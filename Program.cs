@@ -2,16 +2,30 @@
 
 namespace EmployeeWage
 {
-    class Program
+    class EmployeeCompanyWageData
     {
         public const int PART_TIME = 1;
         public const int FULL_TIME = 2;
 
-        public static float wageCalculation(string companyName, int employeeRatePerHour, int workingDays, int maxHours)
+        private string companyName;
+        private int employeeWagePerHour;
+        private int workingDays;
+        private int maxHrPerMonth;
+        public int totalWage;
+
+        public EmployeeCompanyWageData(string company, int empRaterPerHour, int numOfWorkDay, int maxHourPerMonth)
+        {
+            this.companyName = company;
+            this.employeeWagePerHour = empRaterPerHour;
+            this.workingDays = numOfWorkDay;
+            this.maxHrPerMonth = maxHourPerMonth;
+            this.totalWage = 0;
+        }
+        public void calculateWage()
         {
             int empHour = 0, totalEmpHour = 0, totalWorkDay = 0;
 
-            while (totalEmpHour < maxHours && totalWorkDay < workingDays)
+            while (totalEmpHour < this.maxHrPerMonth && totalWorkDay < this.workingDays)
             {
                 Random ran = new Random();
                 int empAttendance = ran.Next(0, 3);
@@ -37,14 +51,28 @@ namespace EmployeeWage
                 Console.WriteLine("Number of Days = {0}, Employee Hours ={1}", totalWorkDay, totalEmpHour);
             }
 
-            int totalEmployeeWage = totalEmpHour * employeeRatePerHour;
-            Console.WriteLine("Total Wage of an Employee for company = {0} is {1}", companyName, totalEmployeeWage);
-            return totalEmployeeWage;
+            int totalWage = totalEmpHour * this.employeeWagePerHour;
+            Console.WriteLine("Total Wage of an Employee : {0} for Company :{1}", totalWage, this.companyName);
+            this.totalWage = totalWage;
         }
+
+        public string toString()
+        {
+            return "Total Emp Wage For Company : " + this.companyName + " is: " + this.totalWage;
+        }
+    }
+    class Program
+    {
         static void Main(string[] args)
         {
-            wageCalculation("Samsung", 20, 10, 100);
-            wageCalculation("Reliance", 100, 50, 200);
+            EmployeeCompanyWageData ZSAssociate = new EmployeeCompanyWageData("Samsung", 20, 20, 50);
+            EmployeeCompanyWageData IHSMarkit = new EmployeeCompanyWageData("Reliance", 10, 40, 400);
+            ZSAssociate.calculateWage();
+            Console.WriteLine(ZSAssociate.toString());
+            IHSMarkit.calculateWage();
+            Console.WriteLine();
         }
     }
 }
+
+
