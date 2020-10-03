@@ -8,36 +8,42 @@ namespace EmployeeWage
         {
             Console.WriteLine("Welcome to Employee Wage Computation Program");
 
-            const int EMP_FULL_TIME = 1;
-            const int EMP_PART_TIME = 2;
-            const int NUM_OF_WORKING_DAY = 20;
-            int EMP_RATE_PER_HOUR = 20;
+            const int PART_TIME = 2;
+            const int FULL_TIME = 1;
+            const int empWagePerHour = 20;
+            int numberOfWorkingDaysInMonth = 20;
+            int workingDays = 0;
+            int empHours = 0;
+            int totalWagePerDay = 0;
+            int totalWagePerMonth = 0;
+            int MAX_HRS_IN_MONTH = 100;
+            int totalEmpHours = 0;
 
-            int totalEmpWage = 0;
-            int empWage = 0;
-            int empHrs = 0;
-
-            for (int Day = 0; Day < NUM_OF_WORKING_DAY; Day++)
+            while (totalEmpHours < MAX_HRS_IN_MONTH && workingDays < numberOfWorkingDaysInMonth)
             {
                 Random random = new Random();
                 int empCheck = random.Next(0, 3);
                 switch (empCheck)
                 {
-                    case EMP_FULL_TIME:
-                        empHrs = 8;
+                    case FULL_TIME:
+                        empHours = 8;
+                        workingDays++;
                         break;
-                    case EMP_PART_TIME:
-                        empHrs = 4;
+                    case PART_TIME:
+                        empHours = 4;
+                        workingDays++;
                         break;
                     default:
-                        empHrs = 0;
+                        empHours = 0;
                         break;
                 }
-                empWage = empHrs * EMP_RATE_PER_HOUR;
-                totalEmpWage += empWage;
-                Console.WriteLine("empWage : " + empWage);
+                totalEmpHours = empHours + totalEmpHours;
+                totalWagePerDay = empHours * empWagePerHour;
+                totalWagePerMonth += totalWagePerDay;
+                Console.WriteLine("Total Wage per Day.. " + totalWagePerDay);
             }
-            Console.WriteLine("Total Emp Wage :" + totalEmpWage);
+            Console.WriteLine("Total Wage per month: " + totalWagePerMonth);
+            Console.ReadKey();
         }
     }
 }
