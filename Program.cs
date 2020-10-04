@@ -13,7 +13,6 @@ namespace EmployeeWage
 
             EmployeeWageCalculators empWageCalculator = new EmployeeWageCalculators();
 
-            //Add the details of all the companyList first
             empWageCalculator.AddCompanyDetails("Reliance", 60, 20, 100);
             empWageCalculator.AddCompanyDetails("Amazon", 40, 20, 80);
 
